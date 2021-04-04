@@ -19,16 +19,19 @@ public class AuthFilter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
-        String headerAuth = httpServletRequest.getHeader("Authorisation");
+        String headerAuth = httpServletRequest.getHeader("Authorization");
         if (headerAuth != null) {
             String[] headerAuthSplitted = headerAuth.split("Bearer ");
-            if (headerAuthSplitted.length > 0 && headerAuthSplitted[1] != null) {
+            if (headerAuthSplitted.length > 1 && headerAuthSplitted[1] != null) {
                 String extractedToken = headerAuthSplitted[1];
+                System.out.println("token: " + extractedToken);
                 try {
                     Claims claims = Jwts.parser().setSigningKey(JwtConfig.API_SECRET_KEY)
                             .parseClaimsJws(extractedToken).getBody();
-                    httpServletRequest.setAttribute("userId", Integer.parseInt(claims.get("user_id").toString() ));
+                    System.out.println("claimed_user_id: " + claims.get("userId").toString());
+                    httpServletRequest.setAttribute("userId", Integer.parseInt(claims.get("userId").toString() ));
                 } catch (Exception exception) {
+                    System.out.println("exception " + exception.getMessage());
                     httpServletResponse.sendError(HttpStatus.FORBIDDEN.value(), "Invalid or expired token!");
                     return;
                 }

@@ -10,14 +10,16 @@ import java.util.Map;
 
 public class JwtConfig {
     public static final String API_SECRET_KEY = "predictionappsecretapikey1234";
-    public static final int TOKEN_VALIDITY_PERIOD = 2 * 60 * 1000; // 1 hour per token
+    public static final int TOKEN_VALIDITY_PERIOD = 5 * 60 * 100000; // 5 hour per token
 
     public static Map<String, String> generateJwtToken(User user) {
         long currentTimestamp = System.currentTimeMillis();
         String token = Jwts.builder().signWith(SignatureAlgorithm.HS256, API_SECRET_KEY)
                 .setIssuedAt(new Date(currentTimestamp))
                 .setExpiration(new Date(currentTimestamp + TOKEN_VALIDITY_PERIOD))
-                .claim("user_id", user.getUserId())
+                .claim("userId", user.getUserId())
+                .claim("firstName", user.getFirstName())
+                .claim("lastName", user.getLastName())
                 .claim("email", user.getEmail())
                 .claim("password", user.getPassword())
                 .compact();
