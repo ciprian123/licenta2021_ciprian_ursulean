@@ -19,7 +19,7 @@ public class AuthFilter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
-        String headerAuth = httpServletRequest.getHeader("Authorisation");
+        String headerAuth = httpServletRequest.getHeader("Authorization");
         if (headerAuth != null) {
             String[] headerAuthSplitted = headerAuth.split("Bearer ");
             if (headerAuthSplitted.length > 0 && headerAuthSplitted[1] != null) {
