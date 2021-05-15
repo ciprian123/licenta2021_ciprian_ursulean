@@ -15,4 +15,11 @@ CREATE TABLE USERS (
     password TEXT NOT NULL
 );
 
+CREATE TABLE DRUG (
+    drug_id SERIAL PRIMARY KEY,
+    name VARCHAR(128) NOT NULL,
+    date_of_usage DATE NOT NULL,
+    price FLOAT NOT NULL
+);
+
 CREATE SEQUENCE user_sequence INCREMENT 1 START 1;

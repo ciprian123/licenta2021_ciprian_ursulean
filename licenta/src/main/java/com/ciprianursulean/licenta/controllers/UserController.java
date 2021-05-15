@@ -6,15 +6,13 @@ import com.ciprianursulean.licenta.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/users")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
     @Autowired
     UserService userService;
@@ -28,7 +26,7 @@ public class UserController {
         User newUser = userService.registerUser(firstName, lastName, email, password);
         return new ResponseEntity<>(JwtConfig.generateJwtToken(newUser), HttpStatus.OK);
     }
-
+    // deep learning for java
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> loginUser(@RequestBody Map<String, Object> userMap) {
         String email = (String) userMap.get("email");
