@@ -14,13 +14,13 @@ public class Drug {
 
     private String diseaseType;
 
-    private Date dateOfUsage;
+    private float dateOfUsage;
 
     private float price;
 
     private float quantity;
 
-    public Drug(Integer drugId, String name, String company, String diseaseType, Date dateOfUsage, float price, float quantity) {
+    public Drug(Integer drugId, String name, String company, String diseaseType, float dateOfUsage, float price, float quantity) {
         this.drugId = drugId;
         this.name = name;
         this.company = company;

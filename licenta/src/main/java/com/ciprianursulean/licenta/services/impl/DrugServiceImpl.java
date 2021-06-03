@@ -6,7 +6,6 @@ import com.ciprianursulean.licenta.services.DrugService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -15,7 +14,7 @@ public class DrugServiceImpl implements DrugService {
     DrugRepository drugRepository;
 
     @Override
-    public Integer createDrug(String name, String company, String diseaseType, Date dateOfUsage, float price, float quantity) {
+    public Integer createDrug(String name, String company, String diseaseType, float dateOfUsage, float price, float quantity) {
         return drugRepository.createDrug(name, company, diseaseType, dateOfUsage, price, quantity);
     }
 
@@ -35,8 +34,8 @@ public class DrugServiceImpl implements DrugService {
     }
 
     @Override
-    public List<Date> getDrugUsageDates(String drugName) {
-        return drugRepository.getDrugUsageDates(drugName);
+    public List<Float> getDrugUsageDatesAsTimestamp(String drugName) {
+        return drugRepository.getDrugUsageDatesAsTimestamp(drugName);
     }
 
     @Override
@@ -67,5 +66,16 @@ public class DrugServiceImpl implements DrugService {
     @Override
     public List<Double> getCompanyQuantities() {
         return drugRepository.getCompanyQuantities();
+    }
+
+    @Override
+    public List<String> getDrugTrainingData(String drugName) {
+        try {
+            return drugRepository.getDrugTrainingData(drugName);
+        }
+        catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 }
