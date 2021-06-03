@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 @Repository
@@ -31,7 +33,8 @@ public class DrugRepositoryImpl implements DrugRepository {
                                                                     "group by date_of_usage, name \n" +
                                                                     "having LOWER(name) = ? " +
                                                                     "order by date_of_usage asc) as foo;";
-    private static final String SQL_GET_DRUG_USAGE_DATETIME_FROM_NAME = "SELECT DISTINCT(date_of_usage) FROM DRUG_DATA WHERE LOWER(name) = ?";
+    private static final String SQL_GET_DRUG_USAGE_DATETIME_AS_TIMESTAMP_FROM_NAME = "SELECT DISTINCT(date_of_usage_timestamp) FROM DRUG_DATA WHERE LOWER(name) = ?";
+    private static final String SQL_GET_DRUG_USAGE_DATETIME_AS_DATE_FROM_NAME = "SELECT DISTINCT(date_of_usage) FROM DRUG_DATA WHERE LOWER(name) = ?";
     private static final String SQL_GET_DRUG_BY_ID = "SELECT * FROM DRUG_DATA where drug_id = ?";
     private static final String SQL_GET_MOST_USED_DRUGS_NAMES = "select name from \n" +
                                                                 "(select name, sum(quantity) from DRUG_DATA group by name order by sum(quantity) desc limit 25) as foo;";
@@ -86,7 +89,12 @@ public class DrugRepositoryImpl implements DrugRepository {
 
     @Override
     public List<Float> getDrugUsageDatesAsTimestamp(String drugName) {
-        return jdbcTemplate.queryForList(SQL_GET_DRUG_USAGE_DATETIME_FROM_NAME, new Object[]{drugName.toLowerCase()}, Float.class);
+        return jdbcTemplate.queryForList(SQL_GET_DRUG_USAGE_DATETIME_AS_TIMESTAMP_FROM_NAME, new Object[]{drugName.toLowerCase()}, Float.class);
+    }
+
+    @Override
+    public List<Date> getDrugUsageDatesAsDate(String drugName) {
+        return jdbcTemplate.queryForList(SQL_GET_DRUG_USAGE_DATETIME_AS_DATE_FROM_NAME, new Object[]{drugName.toLowerCase()}, Date.class);
     }
 
     @Override

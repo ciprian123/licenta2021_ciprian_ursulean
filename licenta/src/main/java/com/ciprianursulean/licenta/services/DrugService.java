@@ -11,6 +11,7 @@ public interface DrugService {
     List<String> getDistinctDrugList();
     List<Double> getDrugQuantities(String drugName);
     List<Float> getDrugUsageDatesAsTimestamp(String drugName);
+    List<Date> getDrugUsageDatesAsDate(String drugName);
     List<String> getMostUsedDrugsNames();
     List<Double> getMostUsedDrugsQuantities();
     List<String> getBiggestPriceDrugName();

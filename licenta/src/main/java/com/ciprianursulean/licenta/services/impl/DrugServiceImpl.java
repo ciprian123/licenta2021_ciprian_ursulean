@@ -6,6 +6,7 @@ import com.ciprianursulean.licenta.services.DrugService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -36,6 +37,11 @@ public class DrugServiceImpl implements DrugService {
     @Override
     public List<Float> getDrugUsageDatesAsTimestamp(String drugName) {
         return drugRepository.getDrugUsageDatesAsTimestamp(drugName);
+    }
+
+    @Override
+    public List<Date> getDrugUsageDatesAsDate(String drugName) {
+        return drugRepository.getDrugUsageDatesAsDate(drugName);
     }
 
     @Override

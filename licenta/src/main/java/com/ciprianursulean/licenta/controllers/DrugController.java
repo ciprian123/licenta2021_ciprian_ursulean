@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -26,9 +27,14 @@ public class DrugController {
         return new ResponseEntity<>(drugService.getDrugQuantities(drugName), HttpStatus.OK);
     }
 
-    @GetMapping("/get-dates")
-    public ResponseEntity<List<Float>> getDrugDateOfUsage(@RequestParam("name") String drugName) {
+    @GetMapping("/get-dates-timestamp")
+    public ResponseEntity<List<Float>> getDrugDateOfUsageAsTimestamp(@RequestParam("name") String drugName) {
         return new ResponseEntity<>(drugService.getDrugUsageDatesAsTimestamp(drugName), HttpStatus.OK);
+    }
+
+    @GetMapping("/get-dates")
+    public ResponseEntity<List<Date>> getDrugDateOfUsageAsDate(@RequestParam("name") String drugName) {
+        return new ResponseEntity<>(drugService.getDrugUsageDatesAsDate(drugName), HttpStatus.OK);
     }
 
     @GetMapping("/get-training-drug-data")
