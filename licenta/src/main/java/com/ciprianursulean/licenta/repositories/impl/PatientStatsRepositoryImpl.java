@@ -4,7 +4,9 @@ import com.ciprianursulean.licenta.repositories.PatientStatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import javafx.util.Pair;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -75,5 +77,14 @@ public class PatientStatsRepositoryImpl implements PatientStatsRepository {
     @Override
     public List<String> getDiseaseTypesByAgeSegment(String startYear, String endYear) {
         return jdbcTemplate.queryForList(SQL_GET_DISEASE_TYPE_BY_INTERVAL, new Object[]{startYear, endYear}, String.class);
+    }
+
+    public List<Pair<Float, String>> getQuantityByLocationAll() {
+        List<Pair<Float, String>> result = new ArrayList<>();
+        List<String> locations = getDistinctLocations();
+        for (String location : locations) {
+            result.add(new Pair<Float, String>(getQuantityByLocation(location).get(0), location));
+        }
+        return result;
     }
 }

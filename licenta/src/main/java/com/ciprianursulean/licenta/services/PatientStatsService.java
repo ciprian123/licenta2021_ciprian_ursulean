@@ -1,5 +1,7 @@
 package com.ciprianursulean.licenta.services;
 
+import javafx.util.Pair;
+
 import java.util.List;
 
 public interface PatientStatsService {
@@ -12,4 +14,5 @@ public interface PatientStatsService {
     List<String> getMostUsedDrugsByAgeSegment(String startYear, String endYear);
     List<Float> getMostUsedQuantitiesByAgeSegment(String startYear, String endYear);
     List<String> getDiseaseTypesByAgeSegment(String startYear, String endYear);
+    List<Pair<Float, String>> getQuantityByLocationAll();
 }

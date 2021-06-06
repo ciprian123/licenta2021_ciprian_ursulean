@@ -1,6 +1,7 @@
 package com.ciprianursulean.licenta.controllers;
 
 import com.ciprianursulean.licenta.services.PatientStatsService;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,11 @@ public class PatientStatsController {
     @GetMapping("/quantity-by-location")
     public ResponseEntity<List<Float>> getQuantityByLocation(@RequestParam("location") String location) {
         return new ResponseEntity<>(patientStatsService.getQuantityByLocation(location), HttpStatus.OK);
+    }
+
+    @GetMapping("/quantity-by-location-all")
+    public ResponseEntity<List<Pair<Float, String>>> getQuantityByLocation() {
+        return new ResponseEntity<>(patientStatsService.getQuantityByLocationAll(), HttpStatus.OK);
     }
 
     @GetMapping("/quantity-by-hospital-section")
