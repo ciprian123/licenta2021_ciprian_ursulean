@@ -26,7 +26,7 @@ public class UserController {
         User newUser = userService.registerUser(firstName, lastName, email, password);
         return new ResponseEntity<>(JwtConfig.generateJwtToken(newUser), HttpStatus.OK);
     }
-    // deep learning for java
+
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> loginUser(@RequestBody Map<String, Object> userMap) {
         String email = (String) userMap.get("email");
