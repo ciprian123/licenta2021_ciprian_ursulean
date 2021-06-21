@@ -16,19 +16,6 @@ public class LicentaApplication {
 		SpringApplication.run(LicentaApplication.class, args);
 	}
 
-//	@Bean
-//	public FilterRegistrationBean<CorsFilter> corsFilter() {
-//		FilterRegistrationBean<CorsFilter> registrationBean = new FilterRegistrationBean<>();
-//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//		CorsConfiguration config = new CorsConfiguration();
-//		config.addAllowedOrigin("*");
-//		config.addAllowedHeader("*");
-//		source.registerCorsConfiguration("/**", config);
-//		registrationBean.setFilter(new CorsFilter(source));
-//		registrationBean.setOrder(0);
-//		return registrationBean;
-//	}
-
 	@Bean
 	public FilterRegistrationBean<AuthFilter> filterRegistrationBean() {
 		FilterRegistrationBean<AuthFilter> registrationBean = new FilterRegistrationBean<>();
